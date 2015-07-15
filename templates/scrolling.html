@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scrolling</title>
+</head>
+<body>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+<script src="{{ url_for('static', filename='js/scrollingline.js')  }}"></script>
+<script>
+    data = d3.range(100).map(function(n) {
+        return Math.round(Math.random() * 0.);
+    });
+    var source = new EventSource("/stream");
+    source.onmessage = function(e) {
+        var msgdata = JSON.parse(e.data);
+        data.push(msgdata.value);
+        data.shift();
+        redraw();
+    };
+  </script>
+</body>
+</html>
