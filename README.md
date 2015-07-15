@@ -26,7 +26,7 @@ Now you can try
 
     python scripts/output.py | python devviz.py
 
-Open a browser and goto (http://localhost:5000). You should see a line plot.
+Open a browser and goto http://localhost:5000. You should see a line plot.
 If you want to visualize your own data, you have to print out a JSON dict with a
 `'value'` member. E.g.:
 
