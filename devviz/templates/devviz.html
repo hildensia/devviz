@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+
+    {% for view in views %}
+        {{ view.style|safe }}
+    {% endfor %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+</head>
+<body>
+
+{% include 'navigation.html' %}
+
+<div class="container">
+<div class="devviz-views">
+{% for view in views %}
+    {{ view.content|safe }}
+{% endfor %}
+</div></div>
+
+
+<!-- Bootstrap js -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+{% for view in views %}
+    {{ view.script|safe }}
+{% endfor %}
+</body>
+</html>
