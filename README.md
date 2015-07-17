@@ -59,14 +59,14 @@ You should see something like:
 ![Screenshot](https://lh3.googleusercontent.com/yx-6l5rvcYcDUe9H23CuAu9fOWzOKh0LN4Rmsb36aiE=w1536-h805-no)
 
 If you want to visualize your own data, you have to print out a JSON dict with a
-`'value'` member. E.g.:
+`'value'`, a `'name'` and a`'type'` member, prefixed with "dvv: ". E.g.:
 
     import json
     x = 0
     while True:
         x += 1
         data = {'name': 'cool_var', 'type': 'double', 'value': x}
-        print(json.dumps(data))
+        print('dvv: {}'.format(json.dumps(data)))
 
 Pipe your output to devviz and your done.
 
