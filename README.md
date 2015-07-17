@@ -35,7 +35,7 @@ Technically it consists of three things:
 
 You can install all the python modules (including flask and bokeh) needed by:
 
-    pip install -r requirements.txt
+    $ pip install -r requirements.txt
     
 Look at the [redis website](http://www.redis.io) how to get redis.
 
@@ -46,12 +46,12 @@ For now we have to start bokeh and redis by hand. It's unconvenient but easy:
 
 Now you can run devviz:
 
-    python devviz.py
+    $ python devviz.py
 
 Open a browser and goto http://localhost:5000. You should see the various views
 without content. To visualize something try:
 
-    python scripts/output.py | scripts/dcollect.py
+    $ python scripts/output.py | scripts/dcollect.py
     
     
 You should see something like:
