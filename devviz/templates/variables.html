@@ -1,0 +1,10 @@
+{% extends 'view.html' %}
+{% block view_title %}Variables{% endblock %}
+{% block view_content %}
+    <table class="table table-striped">
+    <thead><th>Name</th><th>Type</th></thead>
+{% for variable in variables %}
+    <tr><td>{{ variable.name }}</td><td>{{ variable.type }}</td></tr>
+{% endfor %}
+    </table>
+{% endblock %}
