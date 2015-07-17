@@ -65,7 +65,7 @@ If you want to visualize your own data, you have to print out a JSON dict with a
     x = 0
     while True:
         x += 1
-        data = {'value': x}
+        data = {'name': 'cool_var', 'type': 'double', 'value': x}
         print(json.dumps(data))
 
 Pipe your output to devviz and your done.
