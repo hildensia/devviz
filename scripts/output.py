@@ -1,22 +1,29 @@
-import math
+from __future__ import print_function
+
+import numpy as np
 import json
 import time
+import sys
 __author__ = 'johannes'
 
 
 def main():
-    n = 1
+    value = 0
     while True:
         try:
-            x = math.radians(float(n))
-            value = math.sin((1/x) * (1/(1-x)))
-            n += 1
+            value = np.random.normal(value, .01)
             output = {"name": "y",
                       "type": "double",
                       "value": value}
-            print(json.dumps(output))
-            time.sleep(.01)
-
+            print("dvv: {}".format(json.dumps(output)))
+            sys.stdout.flush()
+            b = np.random.uniform(0, 1) > .5
+            output = {"name": "z",
+                      "type": "bool",
+                      "value": b}
+            print("dvv: {}".format(json.dumps(output)))
+            sys.stdout.flush()
+            time.sleep(.1)
 
         except KeyboardInterrupt:
             break
