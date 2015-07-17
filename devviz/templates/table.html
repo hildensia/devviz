@@ -1,0 +1,12 @@
+{% extends 'view.html' %}
+{% block view_title %}TableView{% endblock %}
+{% block view_content %}
+    <table class="table table-striped">
+    <thead><tr><th class="tv-name">Name</th><th class="tv-type">Type</th><th class="tv-value">Current Value</th></tr></thead>
+    <tbody>
+{% for variable in variables %}
+    <tr><td>{{ variable.name }}</td><td>{{ variable.type }}</td><td><span id="var-{{ variable.name }}">{{ variable.value }}</span></td></tr>
+{% endfor %}
+    </tbody>
+    </table>
+{% endblock %}
