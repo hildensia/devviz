@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+"""
+    data_handling
+    ~~~~~~~~~~~~~
+
+    This module provides an interface to all data, which are not session based
+    but still persistant over multiple requests.
+"""
+
 import redis
 from devviz import app
 
