@@ -30,6 +30,10 @@ class DataHandler:
         view_name = self._r.get("view_type_{}".format(viewid))
         return app.views[view_name](viewid=viewid)
 
+    def del_view(self, viewid):
+        self._r.delete("view_type_{}".format(viewid))
+        self._r.delete("view-{}".format(viewid))
+
     def subscribe(self, var):
         self._pubsub.subscribe(var)
 

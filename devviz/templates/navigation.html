@@ -19,7 +19,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add View<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     {% for view in views %}
-                    <li><a href="javascript:load_view('views/new/{{ view.url }}')">{{ view.name }}</a></li>
+                    <li><a href="javascript:load_view('views/{{ view.url }}')">{{ view.name }}</a></li>
                     {% endfor %}
                 </ul>
             </li>

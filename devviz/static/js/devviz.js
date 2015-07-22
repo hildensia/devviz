@@ -6,6 +6,7 @@ function load_view(url) {
     $.ajax({
         url: url,
         dataType: 'json',
+        type: 'POST',
         cache: false,
         success: function (data) {
             $("#devviz-views").append(data.content);
@@ -16,6 +17,22 @@ function load_view(url) {
     });
 }
 
+function remove_view(viewid) {
+    $.ajax({
+    url: '/views/' + viewid,
+    type: 'DELETE',
+    dataType: 'json',
+    cache: false,
+    success: function (data) {
+        $("#view-" + viewid).slideUp("fast", function (){
+          $("#view-" + viewid).remove();
+        });
+    }.bind(this),
+    error: function (xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+    }.bind(this)
+});
+}
 function reload_view(url, type, viewid) {
     $.ajax({
         url: url,

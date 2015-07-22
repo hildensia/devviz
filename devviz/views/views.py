@@ -45,12 +45,28 @@ class View(object):
                 for var in data_handler.get_view_vars(self.viewid)]
 
 
-@app.route("/views/new/<name>")
-def new_view(name):
-    view = app.views[name]()
-    data_handler.set_view(view.viewid, view)
-    session['active_views'].append(view.viewid)
-    return jsonify({"content": view.content})
+class ViewAPI(MethodView):
+    def post(self, name):
+        view = app.views[name]()
+        data_handler.set_view(view.viewid, view)
+        session['active_views'].append(view.viewid)
+        return jsonify({"content": view.content})
+
+    def delete(self, viewid):
+        data_handler.del_view(viewid)
+        session['active_views'].remove(viewid)
+        return jsonify({"content": "true"})
+
+    def get(self, viewid):
+        view = data_handler.get_view(viewid)
+        return jsonify({"content": view.content})
+
+
+view_view = ViewAPI.as_view("views")
+app.add_url_rule("/views/<int:viewid>", view_func=view_view,
+                 methods=['DELETE', 'GET'])
+app.add_url_rule("/views/<name>", view_func=view_view,
+                 methods=['POST'])
 
 
 class VariableAPI(MethodView):
@@ -73,14 +89,14 @@ class VariableAPI(MethodView):
                             })
 
 
-variable_view = VariableAPI.as_view("views")
-app.add_url_rule("/views/<viewid>/<var>", view_func=variable_view,
+variable_view = VariableAPI.as_view("vars")
+app.add_url_rule("/views/<int:viewid>/<var>", view_func=variable_view,
                  methods=['POST', 'DELETE', 'GET'])
-app.add_url_rule("/views/<viewid>/", defaults={'var': None},
+app.add_url_rule("/views/<int:viewid>/vars", defaults={'var': None},
                  view_func=variable_view, methods=['GET'])
 
 
-@app.route("/views/<viewid>/data")
+@app.route("/views/<int:viewid>/data")
 @sse_route
 def data_stream(viewid):
     while True:

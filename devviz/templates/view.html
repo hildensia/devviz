@@ -1,6 +1,8 @@
 <div class="panel panel-primary" id="view-{{ viewid }}">
     <div class="panel-heading">
-        <h3 class="panel-title">{% block view_title %}{% endblock %}</h3>
+        <h3 class="panel-title">{% block view_title %}{% endblock %}
+            <a href="javascript:remove_view('{{ viewid }}')"><span class="fa fa-close header-button"></span></a>
+        </h3>
     </div>
     {% block view_content %}{% endblock %}
 </div>
