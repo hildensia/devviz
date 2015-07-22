@@ -2,7 +2,6 @@
  * Created by johannes on 7/17/15.
  */
 
-console.log("LOADED");
 var VariableTable = React.createClass({
     getInitialState: function() {
         return {data: []};
@@ -53,7 +52,4 @@ var Variable = React.createClass({
         );
     }
 });
-React.render(
-    <VariableTable url="/variables" />,
-    document.getElementById('variablesview')
-);
+
