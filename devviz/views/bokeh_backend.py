@@ -36,7 +36,7 @@ class BokehLinechart(View):
             thread.start()
 
         return render_template('bokeh_linechart.html', divs=divs,
-                               variables=self.variables)
+                               variables=self.variables, viewid=self.viewid)
 
     def update_plot(self, plot, session, var):
         data_handler.subscribe(var)
