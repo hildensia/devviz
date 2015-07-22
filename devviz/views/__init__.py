@@ -1,6 +1,7 @@
 __author__ = 'johannes'
 
-from .views import View
+from .views import *
 from .bokeh_backend import *
 from .variables import *
 from .table import *
+

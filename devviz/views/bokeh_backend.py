@@ -7,36 +7,40 @@ from bokeh.models import ColumnDataSource
 from bokeh.plotting import figure, cursession, push, output_server
 from bokeh.embed import autoload_server
 
-from devviz import redis_store as r
+from devviz import data_handler, app
+from devviz.views import View
 
-class BokehLinechart(object):
-    def __init__(self, variables):
-        self.script = ('<script src="http://cdn.pydata.org/bokeh/release/'
-                       'bokeh-0.9.1.min.js"></script>')
-        self.style = ('<link ref="stylesheet" type="text/css" '
-                      'href="http://cdn.pydata.org/bokeh/release/'
-                      'bokeh-0.9.1.min.css" />')
+
+class BokehLinechart(View):
+    script = ('<script src="http://cdn.pydata.org/bokeh/release/'
+              'bokeh-0.9.1.min.js"></script>')
+    style = ('<link ref="stylesheet" type="text/css" '
+             'href="http://cdn.pydata.org/bokeh/release/'
+             'bokeh-0.9.1.min.css" />')
+    url = 'bokeh'
+    name = 'Bokeh Linechart'
+
+    def __init__(self, variables=None, viewid=None):
+        super(BokehLinechart, self).__init__(variables, viewid)
         self._updated = {}
         self._is_updated = threading.Event()
-        self.variables = variables
 
     @property
     def content(self):
         plot, session = self.create_plot()
         divs = autoload_server(plot, session)
 
-        thread = threading.Thread(target=self.update_plot,
-                                  args=(plot, session))
-        thread.start()
-
+        for var in self.variables:
+            thread = threading.Thread(target=self.update_plot,
+                                      args=(plot, session, var))
+            thread.start()
 
         return render_template('bokeh_linechart.html', divs=divs,
                                variables=self.variables)
 
-    def update_plot(self, plot, session):
-        subscriber = r.pubsub()
-        subscriber.subscribe('y')
-        for item in subscriber.listen():
+    def update_plot(self, plot, session, var):
+        data_handler.subscribe(var)
+        for item in data_handler.listen():
             y = float(item['data'])
             renderer = plot.select(dict(name='line'))
             ds = renderer[0].data_source
@@ -66,3 +70,4 @@ class BokehLinechart(object):
         return p, cursession()
 
 
+app.views[BokehLinechart.url] = BokehLinechart
