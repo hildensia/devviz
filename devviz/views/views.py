@@ -6,6 +6,7 @@ from devviz.utils import sse_route
 from collections import namedtuple
 
 from flask import jsonify, session
+from flask.views import MethodView
 import json
 import time
 
@@ -52,16 +53,31 @@ def new_view(name):
     return jsonify({"content": view.content})
 
 
-@app.route("/views/<viewid>/add/<var>")
-def add_var(viewid, var):
-    view = data_handler.get_view(viewid)
-    return view.add_var(var)
+class VariableAPI(MethodView):
+    def post(self, viewid, var):
+        view = data_handler.get_view(viewid)
+        return view.add_var(var)
+
+    def delete(self, viewid, var):
+        view = data_handler.get_view(viewid)
+        return view.del_var(var)
+
+    def get(self, viewid, var):
+        if var is None:
+            view = data_handler.get_view(viewid)
+            return jsonify({'variables': view.variables})
+        else:
+            return jsonify({'variables': Variable(var,
+                                                  data_handler.get_type(var),
+                                                  data_handler.get_value(var))
+                            })
 
 
-@app.route("/views/<viewid>/del/<var>")
-def del_var(viewid, var):
-    view = data_handler.get_view(viewid)
-    return view.del_var(var)
+variable_view = VariableAPI.as_view("views")
+app.add_url_rule("/views/<viewid>/<var>", view_func=variable_view,
+                 methods=['POST', 'DELETE', 'GET'])
+app.add_url_rule("/views/<viewid>/", defaults={'var': None},
+                 view_func=variable_view, methods=['GET'])
 
 
 @app.route("/views/<viewid>/data")

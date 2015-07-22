@@ -1,6 +1,7 @@
 import redis
 from devviz import app
 
+
 class DataHandler:
     def __init__(self):
         self._r = redis.StrictRedis(decode_responses=True)
@@ -27,7 +28,7 @@ class DataHandler:
 
     def get_view(self, viewid):
         view_name = self._r.get("view_type_{}".format(viewid))
-        return app.views[view_name]()
+        return app.views[view_name](viewid=viewid)
 
     def subscribe(self, var):
         self._pubsub.subscribe(var)
