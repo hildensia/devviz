@@ -16,9 +16,10 @@ function load_view(url) {
     });
 }
 
-function reload_view(url, viewid) {
+function reload_view(url, type, viewid) {
     $.ajax({
         url: url,
+        type: type,
         dataType: 'json',
         cache: false,
         success: function (data) {
@@ -31,11 +32,11 @@ function reload_view(url, viewid) {
 }
 
 function add_var(viewid, variable) {
-    var url = "/views/" + viewid + "/add/" + variable;
-    reload_view(url, viewid);
+    var url = "/views/" + viewid + "/" + variable;
+    reload_view(url, 'POST', viewid);
 }
 
 function del_var(viewid, variable) {
-    var url = "/views/" + viewid + "/del/" + variable;
-    reload_view(url, viewid);
+    var url = "/views/" + viewid + "/" + variable;
+    reload_view(url, 'DELETE', viewid);
 }
