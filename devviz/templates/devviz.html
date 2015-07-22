@@ -14,25 +14,25 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/devviz.js') }}"></script>
+    {% for view in views %}
+        {{ view.script|safe }}
+    {% endfor %}
 </head>
 <body>
+
 
 {% include 'navigation.html' %}
 
 <div class="container">
-<div class="devviz-views">
-{% for view in views %}
+<div class="devviz-views" id="devviz-views">
+{% for view in active_views %}
     {{ view.content|safe }}
 {% endfor %}
 </div></div>
 
 
-<!-- Bootstrap js -->
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-{% for view in views %}
-    {{ view.script|safe }}
-{% endfor %}
 </body>
 </html>
