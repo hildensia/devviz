@@ -1,4 +1,9 @@
-__author__ = 'johannes'
+# -*- coding: utf-8 -*-
+"""
+    Views are the central module to implement views of data. The API is not yet
+    stable.
+"""
+__author__ = 'Johannes Kulick'
 
 from devviz import data_handler, app
 from devviz.utils import sse_route
