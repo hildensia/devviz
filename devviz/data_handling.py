@@ -53,7 +53,7 @@ class DataHandler:
         self._r.lpush("view-{}".format(viewid), var)
 
     def del_view_var(self, viewid, var):
-        self._r.lrem(viewid, 0, var)
+        self._r.lrem("view-{}".format(viewid), 0, var)
 
     def get_new_viewid(self):
         return self._r.incr("views")
