@@ -34,21 +34,17 @@ var VariableTable = React.createClass({displayName: "VariableTable",
             );
         });
         return (
-            React.createElement("table", {className: "table table-striped"}, 
-                React.createElement("thead", null, 
-                React.createElement("tr", null, React.createElement("th", null, "Name"), React.createElement("th", null, "Type"))
-                ), 
-                React.createElement("tbody", null, 
+            React.createElement("div", {className: "container", id: "variables"}, 
                 variableNodes
-                )
             )
         );
     }
 });
 var Variable = React.createClass({displayName: "Variable",
     render: function() {
+        var classString = 'variable ' + this.props.type;
         return (
-            React.createElement("tr", null, React.createElement("td", null, this.props.name), React.createElement("td", null, this.props.type))
+            React.createElement("div", {className: classString, id: this.props.name}, this.props.name)
         );
     }
 });

@@ -34,21 +34,17 @@ var VariableTable = React.createClass({
             );
         });
         return (
-            <table className="table table-striped">
-                <thead>
-                <tr><th>Name</th><th>Type</th></tr>
-                </thead>
-                <tbody>
+            <div className="container" id="variables">
                 {variableNodes}
-                </tbody>
-            </table>
+            </div>
         );
     }
 });
 var Variable = React.createClass({
     render: function() {
+        var classString = 'variable ' + this.props.type;
         return (
-            <tr><td>{this.props.name}</td><td>{this.props.type}</td></tr>
+            <div className={classString} id={this.props.name}>{this.props.name}</div>
         );
     }
 });
