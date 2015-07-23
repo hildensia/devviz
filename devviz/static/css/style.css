@@ -8,4 +8,25 @@ body {
   float: right;
   padding-left: 5px; }
 
+#variables {
+  padding: 10px; }
+
+.variable, .bool, .boolean, .numerical, .double, .float, .int, .integer, .long, .string, .str, .text, .char {
+  border-radius: 3px;
+  border: 1px solid grey;
+  padding: 2px 4px 2px 4px;
+  margin: 4px;
+  display: inline-block;
+  font-weight: bold;
+  color: ghostwhite; }
+
+.bool, .boolean {
+  background-color: #3576B2; }
+
+.numerical, .double, .float, .int, .integer, .long {
+  background-color: #5CB252; }
+
+.string, .str, .text, .char {
+  background-color: #C80B00; }
+
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,44 @@
+$bool-color: #3576B2;
+$string-color: #C80B00;
+$numerical-color: #5CB252;
+
+body {
+  padding-top: 50px;
+}
+
+.devviz-views {
+  padding: 40px 15px;
+}
+
+.header-button {
+  float: right;
+  padding-left: 5px;
+}
+
+#variables {
+  padding: 10px;
+}
+.variable {
+  border-radius: 3px;
+  border: 1px solid grey;
+  padding: 2px 4px 2px 4px;
+  margin: 4px;
+  display: inline-block;
+  font-weight: bold;
+  color: ghostwhite;
+}
+
+  .bool, .boolean {
+    @extend .variable;
+    background-color: $bool-color;
+  }
+
+  .numerical, .double, .float, .int, .integer, .long {
+    @extend .variable;
+    background-color: $numerical-color;
+  }
+
+  .string, .str, .text, .char {
+    @extend .variable;
+    background-color: $string-color;
+  }
