@@ -4,5 +4,21 @@
             <a href="javascript:remove_view('{{ viewid }}')"><span class="fa fa-close header-button"></span></a>
         </h3>
     </div>
+    <div class="panel-footer">
+        <div class="container" id="vars-zone-{{ viewid }}">Variables:
+            {% for var in variables %}
+                <div class="variable {{ var.type }}" id="{{ var.name }}">{{ var.name }}</div>
+            {% endfor %}
+        </div>
+    </div>
     {% block view_content %}{% endblock %}
 </div>
+<script type="text/javascript">
+    main_dnd.containers.push(document.querySelector("#vars-zone-{{ viewid }}"));
+    var rm_dnd = dragula([document.querySelector("#vars-zone-{{ viewid }}")], {
+        removeOnSpill: true,
+    }).on("remove", function (variable, container) {
+        del_var({{ viewid }}, variable.id);
+    });
+
+</script>

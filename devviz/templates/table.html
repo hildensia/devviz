@@ -9,7 +9,6 @@
 {% endfor %}
     </tbody>
     </table>
-    <div><a href="javascript:add_var('{{ viewid }}', 'y')">Add Var</a></div>
     <script type="text/javascript">
         var source = new EventSource("/views/{{ viewid }}/data");
         source.onmessage = function(event) {

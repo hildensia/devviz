@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='dragula/dragula.min.css') }}">
+    <script src="{{ url_for('static', filename='js/devviz.js') }}"></script>
 
     {% for view in views %}
         {{ view.style|safe }}
@@ -17,7 +19,7 @@
 
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="{{ url_for('static', filename='js/devviz.js') }}"></script>
+    <script src="{{ url_for('static', filename='dragula/dragula.js') }}"></script>
     {% for view in views %}
         {{ view.script|safe }}
     {% endfor %}
@@ -33,7 +35,6 @@
     {{ view.content|safe }}
 {% endfor %}
 </div></div>
-
 
 </body>
 </html>

@@ -1,11 +1,26 @@
-{% extends 'view.html' %}
-{% block view_title %}Variables{% endblock %}
-{% block view_content %}
+<div class="panel panel-primary" id="view-{{ viewid }}">
+    <div class="panel-heading">
+        <h3 class="panel-title">Active Variables
+        </h3>
+    </div>
     <div id="{{ viewid }}"></div>
     <script>
         React.render(
                 React.createElement(VariableTable, {url: "/variables"}),
                 document.getElementById('{{ viewid }}')
         );
+        var main_dnd = dragula([document.querySelector("#variables")], {
+            copy: true,
+            revertOnSpill: true
+        }).on("drop", function (variable, target, source) {
+            add_var(target.id.substring(10), variable.id);
+        });
     </script>
-{% endblock %}
+    <div class="panel-footer">
+        Color-Coding:
+        <div class="bool">Boolean</div>
+        <div class="numerical">Numerical</div>
+        <div class="string">String</div>
+    </div>
+</div>
+
