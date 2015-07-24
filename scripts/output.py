@@ -11,12 +11,19 @@ __author__ = 'johannes'
 
 def main():
     value = 0
+    value2 = 0
     while True:
         try:
             value = np.random.normal(value, .01)
             output = {"name": "y",
                       "type": "double",
                       "value": value}
+            print("dvv: {}".format(json.dumps(output)))
+            sys.stdout.flush()
+            value2 = np.random.normal(value2, .1)
+            output = {"name": "faster_y",
+                      "type": "double",
+                      "value": value2}
             print("dvv: {}".format(json.dumps(output)))
             sys.stdout.flush()
             b = np.random.uniform(0, 1) > .5
