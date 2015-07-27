@@ -1,63 +1,63 @@
-#content {
+.content {
     width: 1200px;
     padding: 10px;
     padding-right: 20px;
 }
-#chart {
+.chart {
     display: inline-block;
 }
-#chart path {
+.chart path {
     -webkit-transition: opacity 0.2s linear;
 }
-#preview {
+.preview {
     margin-top: 10px;
 }
-#legend {
+.legend {
     display: inline-block;
     position: relative;
     left: 8px;
 }
-#legend_container {
+.legend_container {
     position: absolute;
     right: 0;
     bottom: 26px;
     width: 0;
 }
-#chart_container {
+.chart_container {
     position: relative;
     display: inline-block;
 }
-#smoother {
+.smoother {
     margin: 0 0 10px 16px;
     width: 100px;
 }
 .rickshaw_graph .detail {
     left: -1000;
 }
-#chart {
+.chart {
     border: 1px solid #f0f0f0;
 }
-#side_panel {
+.side_panel {
     padding: 0 20px 20px 0;
     width: 250px;
     display: inline-block;
     vertical-align: top;
 }
-#side_panel section {
+.side_panel section {
     color: #505050;
     font-size: 12px;
 }
-#side_panel section h6 {
+.side_panel section h6 {
     margin: 0 0 1em 0;
     font-size: 12px;
     font-weight: normal;
 }
-#side_panel .ui-slider-horizontal {
+.side_panel .ui-slider-horizontal {
     height: 1px !important;
     border-color: #e0e0e0;
     margin-bottom: 10px;
 }
-#side_panel .ui-slider-handle {
+.side_panel .ui-slider-handle {
     border-color: #a0a0a0;
     height: 9px !important;
     width: 9px !important;
@@ -66,20 +66,20 @@
     outline: none;
     cursor: pointer;
 }
-#legend {
+.legend {
     background-color: white;
     margin-left: 0;
     padding: 0;
     left: 0;
 }
-#legend .label {
+.legend .label {
     color: #404040;
 }
-#legend .action {
+.legend .action {
     color: black;
     opacity: 0.5;
 }
-#legend ul {
+.legend ul {
     padding: 0;
 }
 section {
@@ -87,21 +87,21 @@ section {
     border-top: 1px solid #eaeaea;
     padding: 15px 0;
 }
-#smoother {
+.smoother {
     margin: 5px 0 0 10px;
     width: 90%;
 }
 label.disabled {
     opacity: 0.4;
 }
-#renderer_form.toggler {
+.renderer_form.toggler {
     display: block;
     margin: 0;
 }
-#renderer_form.toggler input[type=radio]:checked {
+.renderer_form.toggler input[type=radio]:checked {
     outline: 2px solid steelblue;
 }
-#renderer_form.toggler input[type=radio] {
+.renderer_form.toggler input[type=radio] {
     -moz-appearance: button;
     background: white;
     margin: 0 7px;
@@ -109,7 +109,7 @@ label.disabled {
     height: 26px;
     position: absolute;
 }
-#renderer_form.toggler label {
+.renderer_form.toggler label {
     display: inline-block;
     padding: 0;
     width: 39px;
@@ -122,61 +122,61 @@ label.disabled {
     margin: 0 7px;
     cursor: pointer;
 }
-#interpolation_form,
-#offset_form {
+.interpolation_form,
+.offset_form {
     vertical-align: top;
     display: inline-block;
     width: 45%;
 }
-#interpolation_form label,
-#offset_form label {
+.interpolation_form label,
+.offset_form label {
     font-size: 10px;
     padding-left: 5px;
     display: block;
     color: #808080;
 }
-label[for=area] {
+label.area {
     background: url(/static/images/om_stack.png);
 }
-label[for=line] {
+label.line {
     background: url(/static/images/om_lines.png);
 }
-label[for=bar] {
+label.bar {
     background: url(/static/images/om_bar.png);
 }
-label[for=scatter] {
+label.scatter {
     background: url(/static/images/om_scatter.png);
 }
-#offset_form label,
-#interpolation_form label {
+.offset_form label,
+.interpolation_form label {
     background-repeat: no-repeat;
     background-position: 2em center;
     cursor: pointer;
     cursor: hand;
 }
-#offset_form label span,
-#interpolation_form label span {
+.offset_form label span,
+.interpolation_form label span {
     padding-left: 36px;
 }
-label[for=stack] {
+label.stack {
     background-image: url(/static/images/offset_stack.png);
 }
-label[for=pct] {
+label.pct {
     background-image: url(/static/images/offset_pct.png);
 }
-label[for=stream] {
+label.stream {
     background-image: url(/static/images/offset_stream.png);
 }
-label[for=value] {
+label.value {
     background-image: url(/static/images/offset_value.png);
 }
-label[for=cardinal] {
+label.cardinal {
     background-image: url(/static/images/interp_cardinal.png);
 }
-label[for=linear] {
+label.linear {
     background-image: url(/static/images/interp_linear.png);
 }
-label[for=step] {
+label.step {
     background-image: url(/static/images/interp_step.png);
 }
 .rickshawlink {

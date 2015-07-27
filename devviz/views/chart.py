@@ -13,6 +13,7 @@ class ChartView(View):
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
     <script src="/static/rickshaw/rickshaw.js"> </script>
+    <script src="/static/js/chart.js"> </script>
     """
 
     style = """

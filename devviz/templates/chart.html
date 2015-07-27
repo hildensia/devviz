@@ -1,201 +1,72 @@
 {% extends "view.html" %}
 {% block view_title %}Chart{% endblock %}
 {% block view_content %}
-<div id="content">
-	<form id="side_panel">
-		<section><div id="legend"></div></section>
+<div id="content-{{ viewid }}" class="content">
+	<form class="side_panel" id="chart-panel-{{ viewid }}">
+		<section><div id="legend-{{ viewid }}" class="legend"></div></section>
 		<section>
-			<div id="renderer_form" class="toggler">
-				<input type="radio" name="renderer" id="area" value="area" checked>
-				<label for="area">area</label>
-				<input type="radio" name="renderer" id="bar" value="bar">
-				<label for="bar">bar</label>
-				<input type="radio" name="renderer" id="line" value="line">
-				<label for="line">line</label>
-				<input type="radio" name="renderer" id="scatter" value="scatterplot">
-				<label for="scatter">scatter</label>
+			<div class="renderer_form toggler">
+				<input type="radio" name="renderer" id="area-{{ viewid }}" class="area" value="area" checked>
+				<label for="area-{{ viewid }}" class="area">area</label>
+				<input type="radio" name="renderer" id="bar-{{ viewid }}" class="bar" value="bar">
+				<label for="bar-{{ viewid }}" class="bar">bar</label>
+				<input type="radio" name="renderer" id="line-{{ viewid }}" class="line" value="line">
+				<label for="line-{{ viewid }}" class="line">line</label>
+				<input type="radio" name="renderer" id="scatter-{{ viewid }}" class="scatter" value="scatterplot">
+				<label for="scatter-{{ viewid }}" class="scatter">scatter</label>
 			</div>
 		</section>
 		<section>
-			<div id="offset_form">
-				<label for="stack">
-					<input type="radio" name="offset" id="stack" value="zero" checked>
+			<div class="offset_form">
+				<label for="stack-{{ viewid }}" class="stack">
+					<input type="radio" name="offset" id="stack-{{ viewid }}" class="stack" value="zero" checked>
 					<span>stack</span>
 				</label>
-				<label for="stream">
-					<input type="radio" name="offset" id="stream" value="wiggle">
+				<label for="stream-{{ viewid }}" class="stream">
+					<input type="radio" name="offset" id="stream-{{ viewid }}" class="stream" value="wiggle">
 					<span>stream</span>
 				</label>
-				<label for="pct">
-					<input type="radio" name="offset" id="pct" value="expand">
+				<label for="pct-{{ viewid }}" class="pct">
+					<input type="radio" name="offset" id="pct-{{ viewid }}" class="pct" value="expand">
 					<span>pct</span>
 				</label>
-				<label for="value">
-					<input type="radio" name="offset" id="value" value="value">
+				<label for="value-{{ viewid }}" class="value">
+					<input type="radio" name="offset" id="value-{{ viewid }}" class="value" value="value">
 					<span>value</span>
 				</label>
 			</div>
-			<div id="interpolation_form">
-				<label for="cardinal">
-					<input type="radio" name="interpolation" id="cardinal" value="cardinal" checked>
+			<div class="interpolation_form">
+				<label for="cardinal-{{ viewid }}" class="cardinal">
+					<input type="radio" name="interpolation" id="cardinal-{{ viewid }}" class="cardinal" value="cardinal" checked>
 					<span>cardinal</span>
 				</label>
-				<label for="linear">
-					<input type="radio" name="interpolation" id="linear" value="linear">
+				<label for="linear-{{ viewid }}" class="linear">
+					<input type="radio" name="interpolation" id="linear-{{ viewid }}" class="linear" value="linear">
 					<span>linear</span>
 				</label>
-				<label for="step">
-					<input type="radio" name="interpolation" id="step" value="step-after">
+				<label for="step-{{ viewid }}" class="step">
+					<input type="radio" name="interpolation" id="step-{{ viewid }}" class="step" value="step-after">
 					<span>step</span>
 				</label>
 			</div>
 		</section>
 		<section>
 			<h6>Smoothing</h6>
-			<div id="smoother"></div>
+			<div id="smoother-{{ viewid }}" class="smoother"></div>
 		</section>
 		<section class="rickshawlink">Charts powered by <a href="http://http://code.shutterstock.com/rickshaw/">Rickshaw</a>.</section>
 	</form>
 
-	<div id="chart_container">
-		<div id="chart"></div>
-		<div id="timeline"></div>
-		<div id="preview"></div>
+	<div class="chart_container">
+		<div class="chart" id="chart-{{ viewid }}"></div>
+		<div class="timeline" id="timeline-{{ viewid }}"></div>
+		<div class="preview" id="preview-{{ viewid }}"></div>
 	</div>
 
 </div>
 
 <script>
-
-// set up our data series with 150 random data points
-
-var seriesData = [{%- for var in variables -%} [{'x': 0, 'y': 0}], {%- endfor -%}];
-
-var palette = new Rickshaw.Color.Palette( { scheme: 'spectrum2001' } );
-
-// instantiate our graph!
-
-var graph = new Rickshaw.Graph( {
-	element: document.getElementById("chart"),
-	width: 830,
-	height: 500,
-	renderer: 'area',
-	stroke: true,
-	preserve: true,
-    min: 'auto',
-	series: [
-        {% for var in variables %}
-		{
-			color: palette.color(),
-			data: seriesData[{{ loop.index0 }}],
-			name: '{{ var.name }}'
-		},
-        {% endfor %}
-	]
-} );
-
-graph.render();
-
-var preview = new Rickshaw.Graph.RangeSlider( {
-	graph: graph,
-	element: document.getElementById('preview'),
-} );
-
-var hoverDetail = new Rickshaw.Graph.HoverDetail( {
-	graph: graph,
-	xFormatter: function(x) {
-		return new Date(x * 1000).toString();
-	}
-} );
-
-var annotator = new Rickshaw.Graph.Annotate( {
-	graph: graph,
-	element: document.getElementById('timeline')
-} );
-
-var legend = new Rickshaw.Graph.Legend( {
-	graph: graph,
-	element: document.getElementById('legend')
-
-} );
-
-var shelving = new Rickshaw.Graph.Behavior.Series.Toggle( {
-	graph: graph,
-	legend: legend
-} );
-
-var order = new Rickshaw.Graph.Behavior.Series.Order( {
-	graph: graph,
-	legend: legend
-} );
-
-var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight( {
-	graph: graph,
-	legend: legend
-} );
-
-var smoother = new Rickshaw.Graph.Smoother( {
-	graph: graph,
-	element: document.querySelector('#smoother')
-} );
-
-var ticksTreatment = 'glow';
-
-var xAxis = new Rickshaw.Graph.Axis.Time( {
-	graph: graph,
-	ticksTreatment: ticksTreatment,
-	timeFixture: new Rickshaw.Fixtures.Time.Local()
-} );
-
-xAxis.render();
-
-var yAxis = new Rickshaw.Graph.Axis.Y( {
-	graph: graph,
-	tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
-	ticksTreatment: ticksTreatment
-} );
-
-yAxis.render();
-
-var controls = new RenderControls( {
-	element: document.querySelector('form'),
-	graph: graph
-} );
-
-var event_listener = new EventSource("/views/{{  viewid }}/data");
-event_listener.onmessage = function (e) {
-    var data = JSON.parse(e.data);
-    for (series of graph.series) {
-        if (series.name === data.var) {
-{#            console.log("====");#}
-{#            console.log(series.name);#}
-{#            console.log(data.var);#}
-            last_data = series.data[series.data.length - 1];
-            series.data.push({'x': last_data['x'] + 1, 'y': parseFloat(data.value)});
-            if (series.data.length > 3000) {
-                series.data.shift();
-            }
-        }
-    }
-    graph.update();
-};
-
-{#function addAnnotation(force) {#}
-{#	if (messages.length > 0 && (force || Math.random() >= 0.95)) {#}
-{#		annotator.add(seriesData[2][seriesData[2].length-1].x, messages.shift());#}
-{#		annotator.update();#}
-{#	}#}
-
-
-{#addAnnotation(true);#}
-{#setTimeout( function() { setInterval( addAnnotation, 6000 ) }, 6000 );#}
-
-var previewXAxis = new Rickshaw.Graph.Axis.Time({
-	graph: preview.previews[0],
-	timeFixture: new Rickshaw.Fixtures.Time.Local(),
-	ticksTreatment: ticksTreatment
-});
-
-previewXAxis.render();
+var variables = [{%- for var in variables -%} "{{- var.name -}}", {%- endfor -%}];
+create_graph(variables, {{ viewid }});
 </script>
 {% endblock %}
